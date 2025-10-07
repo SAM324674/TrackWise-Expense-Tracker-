@@ -8,7 +8,7 @@ import { Budgets, Expenses } from '@/utils/schema';
 import AddExpense from '../_components/AddExpense';
 import ExpenseListTable from '../_components/ExpenseListTable';
 import { Button } from '@/components/ui/button';
-import { Trash } from 'lucide-react';
+import { Pen, PenBox, Trash } from 'lucide-react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,12 +22,13 @@ import {
 } from "@/components/ui/alert-dialog"
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import EditBudget from '../_components/EditBudget';
 const ExpensesPage = ({ params }) => {
   const { user } = useUser();
   const resolvedParams = React.use(params);
   const [budgetInfo, setbudgetInfo] = useState();
   const [expenseList, setExpenseList] = useState([]);
-  const route=useRouter();
+  const route = useRouter();
   useEffect(() => {
     //  console.log("params:",params.id);
     user && getBudgetInfo();
@@ -65,20 +66,22 @@ const ExpensesPage = ({ params }) => {
     const DeleteExpensesresult = await db.delete(Expenses).where(eq(Expenses.budgetId, resolvedParams.id))
       .returning();
 
-    if(DeleteExpensesresult) {
+    if (DeleteExpensesresult) {
       const result = await db.delete(Budgets).where(eq(Budgets.id, resolvedParams.id)).returning();
     }
     toast("Budget Deleted Successfully");
     route.replace('/dashboard/budget');
   }
-  
-    return (
-      <div className=''>
-        <div className='flex items-center justify-between m-2'>
-          <h2 className='text-2xl font-bold p-3 '>
-            My Expenses
-          </h2>
 
+  return (
+    <div className=''>
+      <div className='flex items-center justify-between m-2'>
+        <h2 className='text-2xl font-bold p-3 '>
+          My Expenses
+        </h2>
+
+        <div className='flex'>
+           <EditBudget budgetInfo={budgetInfo} refreshData={()=>getBudgetInfo()}/>
           <AlertDialog>
             <AlertDialogTrigger>
               <Button variant="outline" className="border bg-destructive text-white border-destructive ">
@@ -100,19 +103,25 @@ const ExpensesPage = ({ params }) => {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-        </div>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  m-2 '>
-          {budgetInfo ? <BudgetItem budget={budgetInfo} /> :
-            <div className=' m-3 md:m-2 bg-slate-300 rounded-lg h-[10rem] animate-pulse '></div>
-          }
-          <AddExpense budgetId={budgetInfo?.id} user={user} refreshData={getBudgetInfo} />
-        </div>
-        <div className='m-3'>
-          Latest Expenses
-          <ExpenseListTable expenseList={expenseList} refreshData={() => getBudgetInfo()} />
-        </div>
-      </div>
-    )
-  }
 
-  export default ExpensesPage
+
+         
+        </div>
+
+      </div>
+
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  m-2 '>
+        {budgetInfo ? <BudgetItem budget={budgetInfo} /> :
+          <div className=' m-3 md:m-2 bg-slate-300 rounded-lg h-[10rem] animate-pulse '></div>
+        }
+        <AddExpense budgetId={budgetInfo?.id} user={user} refreshData={getBudgetInfo} />
+      </div>
+      <div className='m-3'>
+        Latest Expenses
+        <ExpenseListTable expenseList={expenseList} refreshData={() => getBudgetInfo()} />
+      </div>
+    </div>
+  )
+}
+
+export default ExpensesPage
