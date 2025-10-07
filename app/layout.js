@@ -8,6 +8,7 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import { Toaster } from "sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
         <body
           className={`${outfit.className} antialiased`}
         >
+          <Toaster/>
           {children}  {/*All the pages are going to be rendered through this children*/}
         </body>
       </html>
