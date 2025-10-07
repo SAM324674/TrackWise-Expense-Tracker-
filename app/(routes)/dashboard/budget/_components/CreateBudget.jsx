@@ -22,7 +22,7 @@ import { Budgets } from '@/utils/schema'
 import { toast } from 'sonner'
 import { db } from '@/utils/dbConfig'
 import { useUser } from '@clerk/nextjs'
-const CreateBudget = () => {
+const CreateBudget = ({refreshData}) => {
     const [chosenEmoji, setChosenEmoji] = useState('🙂');
     const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
     const [Name, setName] = useState('');
@@ -43,6 +43,7 @@ const CreateBudget = () => {
 
             console.log(result);
             if (result) {toast("Budget Created Successfully");
+                refreshData();
                 setName("");
                 setAmount(0);
                 setChosenEmoji("🙂");
