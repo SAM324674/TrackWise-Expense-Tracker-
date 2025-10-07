@@ -61,7 +61,7 @@ const CreateBudget = ({refreshData}) => {
         <Dialog open={open} onOpenChange={setOpen}>
             <form>
                 <DialogTrigger asChild>
-                    <div className=' m-4 bg-slate-200 p-10 rounded-md items-center flex flex-col border-2 border-dashed cursor-pointer hover:shadow-md'>
+                    <div className=' m-3 bg-slate-200 p-10 h-[9.5rem] rounded-md items-center flex flex-col border-2 border-dashed cursor-pointer hover:shadow-md'>
                         <Plus />
                         Create New Budget
                     </div>

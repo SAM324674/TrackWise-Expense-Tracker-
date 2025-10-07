@@ -27,15 +27,17 @@ export const metadata = { //seo purpose
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${outfit.className} antialiased`}
-        >
-          <Toaster/>
+
+    <html lang="en">
+      <body
+        className={`${outfit.className} antialiased`}
+      >
+        <ClerkProvider>
+          <Toaster />
           {children}  {/*All the pages are going to be rendered through this children*/}
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
+
   );
 }
