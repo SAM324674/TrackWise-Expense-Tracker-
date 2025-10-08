@@ -49,7 +49,7 @@ const SideNav = () => {
             </div>
           </Link>
         ))}
-        <div className='mt-[17rem] flex gap-5 cursor-pointer  p-2 hover:text-[#389647] hover:bg-green-50 rounded-md '>
+        <div className='mt-[17rem] flex items-center gap-5 cursor-pointer  p-2 hover:text-[#389647] hover:bg-green-50 rounded-md '>
           <UserButton />
           <h1>Profile</h1>
         </div>
