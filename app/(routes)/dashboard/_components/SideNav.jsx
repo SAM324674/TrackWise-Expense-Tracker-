@@ -30,12 +30,12 @@ const SideNav = () => {
       icon: LucideReceiptText,
       path: '/dashboard/expenses'
     },
-    {
-      id: 4,
-      name: 'Upgrade',
-      icon: ShieldCheck,
-      path: '/dashboard/upgrade'
-    }
+    // {
+    //   id: 4,
+    //   name: 'Upgrade',
+    //   icon: ShieldCheck,
+    //   path: '/dashboard/upgrade'
+    // }
   ]
   return (
     <div className='h-screen w-[10rem] bg-white p-2'>
@@ -49,7 +49,7 @@ const SideNav = () => {
             </div>
           </Link>
         ))}
-        <div className='mt-[20rem] flex gap-5 cursor-pointer  p-2 hover:text-[#389647] hover:bg-green-50 rounded-md '>
+        <div className='mt-[17rem] flex gap-5 cursor-pointer  p-2 hover:text-[#389647] hover:bg-green-50 rounded-md '>
           <UserButton />
           <h1>Profile</h1>
         </div>
