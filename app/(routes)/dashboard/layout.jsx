@@ -5,8 +5,8 @@ import DashboardHeader from './_components/DashboardHeader'
 import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
 import { eq } from 'drizzle-orm'
-import { db } from '../../../utils/dbConfig'
-import { Budgets } from '../../../utils/schema'
+import { db } from '@/utils/dbConfig'
+import { Budgets } from '@/utils/schema'
 const Dashboardlayout = ({ children }) => {
   const router=useRouter();
     const {user}=useUser();
@@ -28,7 +28,7 @@ const Dashboardlayout = ({ children }) => {
       <div className='border fixed '>
         <SideNav />
       </div>
-      <div className='ml-[10rem] border w-screen'>
+      <div className='ml-[10rem] w-screen'>
         <DashboardHeader/>
         {children}
 

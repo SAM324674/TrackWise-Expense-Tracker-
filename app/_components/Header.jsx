@@ -1,5 +1,5 @@
 "use client"
-import { Button } from '../../components/button'
+import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import {UserButton, useUser} from '@clerk/nextjs';
 import React from 'react'

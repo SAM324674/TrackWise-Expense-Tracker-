@@ -81,7 +81,7 @@ const ExpensesPage = ({ params }) => {
         </h2>
 
         <div className='flex'>
-           <EditBudget budgetInfo={budgetInfo} refreshData={()=>getBudgetInfo()}/>
+          <EditBudget budgetInfo={budgetInfo} refreshData={() => getBudgetInfo()} />
           <AlertDialog>
             <AlertDialogTrigger>
               <Button variant="outline" className="border bg-destructive text-white border-destructive ">
@@ -105,7 +105,7 @@ const ExpensesPage = ({ params }) => {
           </AlertDialog>
 
 
-         
+
         </div>
 
       </div>
@@ -117,8 +117,12 @@ const ExpensesPage = ({ params }) => {
         <AddExpense budgetId={budgetInfo?.id} user={user} refreshData={getBudgetInfo} />
       </div>
       <div className='m-3'>
-        Latest Expenses
-        <ExpenseListTable expenseList={expenseList} refreshData={() => getBudgetInfo()} />
+        {expenseList.length > 0 ?
+          <>
+            <h2 className='text-lg font-bold'>Latest Expenses</h2>
+            <ExpenseListTable expenseList={expenseList} refreshData={() => {getBudgetInfo();getExpensesList()}} />
+          </>
+          : <></>}
       </div>
     </div>
   )

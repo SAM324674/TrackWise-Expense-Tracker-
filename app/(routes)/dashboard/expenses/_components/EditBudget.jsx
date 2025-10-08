@@ -43,14 +43,11 @@ const EditBudget = ({budgetInfo,refreshData}) => {
     }
     return (
         <>
+
             <Dialog open={open} onOpenChange={setOpen}>
+                
                 <form>
-                    <DialogTrigger asChild>
-                        <Button className=' m-3  cursor-pointer'>
-                            <PenBox />
-                            Edit
-                        </Button>
-                    </DialogTrigger>
+                 
                     <DialogContent className="sm:max-w-[425px]">
                         <DialogHeader>
                             <DialogTitle>Update budget</DialogTitle>
