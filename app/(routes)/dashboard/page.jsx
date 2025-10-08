@@ -14,9 +14,21 @@ function Dashboard() {
   const [BudgetList, setBudgetlist] = useState([]);
   const [ExpenseList, setExpenseList] = useState([]);
   useEffect(() => {
-    user && getBudgetList();
+    if (user){
+      getBudgetList();
+      checkUserBudgets();
+    } 
   }, [user]);
-
+ 
+  
+      const checkUserBudgets=async()=>{
+          const result=await db.select().from(Budgets).where(eq(Budgets.createdBy,user?.primaryEmailAddress?.emailAddress));
+  
+          console.log("result:",result);
+          if(result?.length==0){
+              router.replace('/dashboard/budget');
+          }
+      }   
   const getBudgetList = async () => {
     const result = await db.select({
       ...getTableColumns(Budgets),
@@ -33,7 +45,7 @@ function Dashboard() {
     console.log("result:", result);
   }
   //  console.log("budgetlist:",BudgetList);
-
+  
   const getAllExpenses = async () => {
     const result = await db.select({
       id: Expenses.id,
