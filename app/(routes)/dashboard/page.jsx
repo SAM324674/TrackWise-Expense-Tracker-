@@ -8,11 +8,13 @@ import CardInfo from './_components/CardInfo';
 import BarChartDashboard from './_components/BarChartDashboard';
 import BudgetItem from './budget/_components/BudgetItem';
 import ExpenseListTable from './expenses/_components/ExpenseListTable';
+import { useRouter } from 'next/navigation';
 
 function Dashboard() {
   const { user } = useUser();
   const [BudgetList, setBudgetlist] = useState([]);
   const [ExpenseList, setExpenseList] = useState([]);
+  const router=useRouter();
   useEffect(() => {
     if (user){
       getBudgetList();
@@ -26,7 +28,7 @@ function Dashboard() {
   
           console.log("result:",result);
           if(result?.length==0){
-              router.replace('/dashboard/budget');
+              router.push('/dashboard/budget');
           }
       }   
   const getBudgetList = async () => {
