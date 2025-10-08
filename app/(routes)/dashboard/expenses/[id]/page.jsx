@@ -80,14 +80,17 @@ const ExpensesPage = ({ params }) => {
           My Expenses
         </h2>
 
-        <div className='flex'>
+        <div className='flex gap-4 items-center'>
           <EditBudget budgetInfo={budgetInfo} refreshData={() => getBudgetInfo()} />
           <AlertDialog>
-            <AlertDialogTrigger>
-              <Button variant="outline" className="border bg-destructive text-white border-destructive ">
-                <Trash />
-                Delete
-              </Button>
+            <AlertDialogTrigger className="border w-[6.7rem] hover:text-white hover:bg-destructive text-destructive cursor-pointer border-destructive rounded-md ">
+              {/* <Button variant="outline" className="border bg-destructive text-white border-destructive "> */}
+              <div className='flex p-2 justify-evenly items-center'>
+                <Trash size={18}/>
+                <h2>Delete</h2>
+              </div>
+
+              {/* </Button> */}
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
@@ -120,7 +123,7 @@ const ExpensesPage = ({ params }) => {
         {expenseList.length > 0 ?
           <>
             <h2 className='text-lg font-bold'>Latest Expenses</h2>
-            <ExpenseListTable expenseList={expenseList} refreshData={() => {getBudgetInfo();getExpensesList()}} />
+            <ExpenseListTable expenseList={expenseList} refreshData={() => { getBudgetInfo(); getExpensesList() }} />
           </>
           : <></>}
       </div>

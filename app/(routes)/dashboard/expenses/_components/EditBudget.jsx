@@ -20,7 +20,7 @@ import { db } from '@/utils/dbConfig'
 import { Budgets } from '@/utils/schema'
 import { toast } from 'sonner'
 import { eq } from 'drizzle-orm'
-const EditBudget = ({budgetInfo,refreshData}) => {
+const EditBudget = ({ budgetInfo, refreshData }) => {
     const [open, setOpen] = useState(false);
     const [chosenEmoji, setChosenEmoji] = useState(budgetInfo?.icon);
     const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
@@ -28,14 +28,14 @@ const EditBudget = ({budgetInfo,refreshData}) => {
     const [Amount, setAmount] = useState(budgetInfo?.amount);
     const { user } = useUser();
 
-    const onUpdateBudget=async()=>{
-        const result=await db.update(Budgets).set({
-            name:Name,
-            amount:Amount,
-            icon:chosenEmoji
-        }).where(eq(Budgets.id,budgetInfo.id)).returning();
+    const onUpdateBudget = async () => {
+        const result = await db.update(Budgets).set({
+            name: Name,
+            amount: Amount,
+            icon: chosenEmoji
+        }).where(eq(Budgets.id, budgetInfo.id)).returning();
 
-        if(result){
+        if (result) {
             refreshData();
             toast("Budget Updated");
             setOpen(false);
@@ -45,10 +45,19 @@ const EditBudget = ({budgetInfo,refreshData}) => {
         <>
 
             <Dialog open={open} onOpenChange={setOpen}>
-                
+
                 <form>
-                 
+                    <DialogTrigger asChild>
+                        <div className='p-2 hover:bg-primary flex rounded-md w-[6rem] justify-evenly border-primary border text-primary hover:text-white'>
+                            {/* <Button> */}
+                                
+                            <PenBox />
+                            <h2>Edit</h2>
+                            {/* </Button> */}
+                        </div>
+                    </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
+                       
                         <DialogHeader>
                             <DialogTitle>Update budget</DialogTitle>
                             {/* <DialogDescription> */}
@@ -60,11 +69,10 @@ const EditBudget = ({budgetInfo,refreshData}) => {
                             className="w-[4rem] "
                             variant={"outline"}
                             onClick={() => setOpenEmojiPicker(!openEmojiPicker)}
-                        >{budgetInfo?.icon}</Button>
+                        >{chosenEmoji}</Button>
 
                         <div className='absolute'>
                             <EmojiPicker
-
                                 open={openEmojiPicker}
                                 onEmojiClick={(e) => {
                                     setChosenEmoji(e.emoji)
@@ -84,7 +92,7 @@ const EditBudget = ({budgetInfo,refreshData}) => {
                         </div>
                         <DialogFooter className="flex">
                             {/* <DialogClose asChild> */}
-                            <Button className="flex w-full" type="submit" disabled={!(Name && Amount)} onClick={()=>onUpdateBudget()}>Update Budget</Button>
+                            <Button className="flex w-full" type="submit" disabled={!(Name && Amount)} onClick={() => onUpdateBudget()}>Update Budget</Button>
                             {/* </DialogClose> */}
                             <DialogClose asChild>
                                 <Button className="absolute top-1 right-4 z-50 bg-white text-black p-2 cursor-pointer" onClick={() => { setName(""); setAmount(""); setChosenEmoji("🙂"); }}>
